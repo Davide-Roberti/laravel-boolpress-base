@@ -77,7 +77,13 @@ class postController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Article::where('slug', $slug)->first();
+
+        if(empty($post)){
+            abort('404');
+        }
+
+        return view('posts.show', compact('post'));
     }
 
     /**
