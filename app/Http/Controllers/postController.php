@@ -29,7 +29,9 @@ class postController extends Controller
      */
     public function create()
     {
-        //
+        {
+        return view('posts.create');
+    }
     }
 
     /**
@@ -40,7 +42,31 @@ class postController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = Str::slug($data['title'] , '-') . rand(1,100);
+
+
+        $validator = Validator::make($data, [
+            'title' => 'required|string|max:150',
+            'body' => 'required',
+            'author' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('posts/create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $post = new Post;
+
+        $post->fill($data);
+        $saved = $post->save();
+        if(!$saved) {
+            dd('errore di salvataggio');
+        }
+
+        return redirect()->route('posts.show', $post->id);
     }
 
     /**

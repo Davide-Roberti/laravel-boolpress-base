@@ -11,7 +11,7 @@ class post extends Model
         'author',
         'slug',
         'body',
-        'img'
+        'img',
         'published',
     ];
 }
