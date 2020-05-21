@@ -15,7 +15,7 @@
                 </ul>
             </div>
         @endif
-        <form action="{{route('posts.edit', $post->id)}}" method="POST">
+        <form action="{{route('posts.update', $post->id)}}" method="POST">
             @csrf
             @method('PUT')
             <div>
