@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\post;
 use Illuminate\Support\Str;
 
+use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
+
 class postController extends Controller
 {
     /**
@@ -92,7 +95,7 @@ class postController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
         if(empty($post)) {
          abort('404');
